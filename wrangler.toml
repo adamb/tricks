@@ -1,5 +1,8 @@
-name = "sveltekit-app"
+name = "tricks"
 compatibility_date = "2024-01-29"
+
+pages_build_output_dir = ".svelte-kit/cloudflare"
+compatibility_flags = ["nodejs_compat"]
 
 # Configure production environment
 [env.production]
@@ -18,9 +21,6 @@ workers_dev = true
 [build]
 command = "npm run build"
 
-# Configure site settings for static assets
-[site]
-bucket = "./build"
 
 # Configure compatibility flags if needed
 # compatibility_flags = []
