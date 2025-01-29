@@ -1,5 +1,6 @@
 <script>
-    export const ssr = true;
+    /** @type {import('./$types').PageData} */
+    export let data;
 </script>
 
 <style>
