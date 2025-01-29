@@ -1,0 +1,26 @@
+name = "sveltekit-app"
+compatibility_date = "2024-01-29"
+
+# Configure production environment
+[env.production]
+workers_dev = true
+
+# Configure routes for production
+# routes = [
+#   { pattern = "example.com/*", zone_id = "your-zone-id-here" }
+# ]
+
+# Configure development environment
+[env.development]
+workers_dev = true
+
+# Configure builds
+[build]
+command = "npm run build"
+
+# Configure site settings for static assets
+[site]
+bucket = "./build"
+
+# Configure compatibility flags if needed
+# compatibility_flags = []
