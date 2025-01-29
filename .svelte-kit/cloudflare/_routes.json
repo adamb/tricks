@@ -5,6 +5,8 @@
 		"/*"
 	],
 	"exclude": [
-		"/_app/*"
+		"/_app/*",
+		"/favicon.ico",
+		"/"
 	]
 }

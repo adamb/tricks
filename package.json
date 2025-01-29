@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "vite": "^4.0.0"
+    "@sveltejs/adapter-cloudflare": "^5.0.1",
+    "vite": "^6.0.11"
   }
 }

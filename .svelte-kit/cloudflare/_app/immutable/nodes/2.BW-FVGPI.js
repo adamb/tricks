@@ -1,1 +1,0 @@
-import{a as t,t as o}from"../chunks/D8QP7k_R.js";import"../chunks/D-9fIO-n.js";var i=o('<div class="container svelte-y86d3n"><div class="banner svelte-y86d3n">Stupid Cloud Tricks - Welcome to the Main Page!</div></div>');function r(e){var a=i();t(e,a)}export{r as component};
