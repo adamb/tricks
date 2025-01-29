@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Stupid Cloud Tricks",
   "main": "svelte.config.js",
+  "type": "module",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
