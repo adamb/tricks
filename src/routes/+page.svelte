@@ -23,5 +23,5 @@
 </style>
 
 <div class="container">
-    <div class="banner">Stupid Cloud Tricks</div>
+    <div class="banner">Stupid Cloud Tricks - Welcome to the Main Page!</div>
 </div>
