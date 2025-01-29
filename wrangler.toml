@@ -1,26 +1,9 @@
 name = "tricks"
 compatibility_date = "2024-01-29"
-
-pages_build_output_dir = ".svelte-kit/cloudflare"
 compatibility_flags = ["nodejs_compat"]
 
-# Configure production environment
-[env.production]
-workers_dev = true
-
-# Configure routes for production
-# routes = [
-#   { pattern = "example.com/*", zone_id = "your-zone-id-here" }
-# ]
-
-# Configure development environment
-[env.development]
-workers_dev = true
-
-# Configure builds
 [build]
 command = "npm run build"
 
-
-# Configure compatibility flags if needed
-# compatibility_flags = []
+[site]
+bucket = ".svelte-kit/cloudflare"
