@@ -28,19 +28,46 @@
         text-align: left;
     }
 
-    h1 {
+    h1, h2 {
         text-align: center;
         color: #ffcc00;
         margin-bottom: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .section {
+        margin-bottom: 2rem;
+        padding: 1rem;
+        border: 1px solid #ffcc00;
+        border-radius: 4px;
     }
 </style>
 
 <div class="whoami-container">
     <h1>Client Information</h1>
     <div class="info-grid">
-        {#each Object.entries(clientInfo) as [key, value]}
-            <div class="label">{key}:</div>
-            <div class="value">{value || 'N/A'}</div>
-        {/each}
+        <div class="section">
+            <h2>Client Details</h2>
+            {#each Object.entries(clientInfo).filter(([key]) => !['workerIP', 'workerLocation'].includes(key)) as [key, value]}
+                <div class="label">{key}:</div>
+                <div class="value">{value || 'N/A'}</div>
+            {/each}
+        </div>
+        
+        <div class="section">
+            <h2>Worker Details</h2>
+            <div class="label">Worker IP:</div>
+            <div class="value">{clientInfo.workerIP}</div>
+            {#if clientInfo.workerLocation && typeof clientInfo.workerLocation === 'object'}
+                {#each Object.entries(clientInfo.workerLocation) as [key, value]}
+                    <div class="label">{key}:</div>
+                    <div class="value">{value || 'N/A'}</div>
+                {/each}
+            {/if}
+        </div>
     </div>
 </div>
