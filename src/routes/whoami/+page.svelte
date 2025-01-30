@@ -48,19 +48,15 @@
 </style>
 
 <div class="whoami-container">
-    <h1>Client Information</h1>
+    <h1>Request Information</h1>
     <div class="info-grid">
         <div class="section">
-            <h2>Client Details</h2>
-            {#each Object.entries(clientInfo).filter(([key]) => !['workerIP', 'workerLocation'].includes(key)) as [key, value]}
-                <div class="label">{key}:</div>
-                <div class="value">{value || 'N/A'}</div>
-            {/each}
-        </div>
-        
-        <div class="section">
-            <h2>Worker Details</h2>
-            <div class="label">Worker IP:</div>
+            <h2>Client IP</h2>
+            <div class="label">IP Address:</div>
+            <div class="value">{clientInfo.ip}</div>
+            
+            <h2>Worker IP</h2>
+            <div class="label">IP Address:</div>
             <div class="value">{clientInfo.workerIP}</div>
             {#if clientInfo.workerLocation && typeof clientInfo.workerLocation === 'object'}
                 {#each Object.entries(clientInfo.workerLocation) as [key, value]}
@@ -68,6 +64,12 @@
                     <div class="value">{value || 'N/A'}</div>
                 {/each}
             {/if}
+
+            <h2>Additional Details</h2>
+            {#each Object.entries(clientInfo).filter(([key]) => !['ip', 'workerIP', 'workerLocation'].includes(key)) as [key, value]}
+                <div class="label">{key}:</div>
+                <div class="value">{value || 'N/A'}</div>
+            {/each}
         </div>
     </div>
 </div>
