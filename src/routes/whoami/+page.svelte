@@ -1,6 +1,19 @@
 <script>
     export let data;
     const { clientInfo } = data;
+    
+    async function getClientIP() {
+        try {
+            const response = await fetch('https://api.ipify.org');
+            const ip = await response.text();
+            return ip;
+        } catch (error) {
+            console.error('Error fetching client IP:', error);
+            return 'Not available';
+        }
+    }
+
+    let clientIPPromise = getClientIP();
 </script>
 
 <style>
@@ -53,7 +66,15 @@
         <div class="section">
             <h2>Client Details (Your Browser)</h2>
             <div class="label">IP Address:</div>
-            <div class="value">{clientInfo.ip}</div>
+            <div class="value">
+                {#await clientIPPromise}
+                    Loading...
+                {:then ip}
+                    {ip}
+                {:catch error}
+                    Error loading IP
+                {/await}
+            </div>
             {#each Object.entries(clientInfo).filter(([key]) => !['ip', 'workerIP', 'workerLocation'].includes(key)) as [key, value]}
                 <div class="label">{key}:</div>
                 <div class="value">{value || 'N/A'}</div>

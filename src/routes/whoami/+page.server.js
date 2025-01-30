@@ -1,7 +1,6 @@
 export async function load({ request, platform }) {
     // Get Cloudflare data from the request object
     const cf = request.cf;
-    const clientIP = request?.cf?.ip || 'Not available';
     
     // Get Worker's IP from ipify
     let workerIP = 'Not available';
@@ -27,7 +26,7 @@ export async function load({ request, platform }) {
     return {
         clientInfo: {
             // Client Network Info
-            ip: clientIP,
+            ip: cf?.ip || 'Not available',
             asn: cf?.asn || 'Not available',
             asOrganization: cf?.asOrganization || 'Not available',
             httpProtocol: cf?.httpProtocol || 'Not available',
