@@ -11,8 +11,7 @@
     "enabled": true
   },
   "vars": {
-    "API_KEY": "",
-    "ANOTHER_SECRET": "",
+    "IPAPI_KEY": "",
     "NODE_ENV": "production"
   },
 
