@@ -115,6 +115,10 @@
                 <div class="label">IP Address:</div>
                 <div class="value">{clientInfo.workerIP}</div>
             </div>
+            <div class="data-row">
+                <div class="label">Datacenter (colo):</div>
+                <div class="value">{clientInfo.datacenter}</div>
+            </div>
             {#if clientInfo.workerLocation && typeof clientInfo.workerLocation === 'object'}
                 {#each Object.entries(clientInfo.workerLocation) as [key, value]}
                     <div class="data-row">
