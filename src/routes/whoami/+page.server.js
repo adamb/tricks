@@ -5,7 +5,7 @@ export async function load({ request }) {
     return {
         clientInfo: {
             // Client Network Info
-            ip: request?.cf?.ip || 'Not available',
+            ip: cf?.ip || 'Not available',
             asn: cf?.asn || 'Not available',
             asOrganization: cf?.asOrganization || 'Not available',
             httpProtocol: cf?.httpProtocol || 'Not available',
