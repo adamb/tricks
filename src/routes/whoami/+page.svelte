@@ -89,6 +89,16 @@
                     <div class="value">{value || 'N/A'}</div>
                 {/each}
             {/if}
+            
+            <h2>Distance</h2>
+            <div class="label">Client to Worker:</div>
+            <div class="value">
+                {#if typeof clientInfo.distanceKm === 'number'}
+                    {clientInfo.distanceKm} kilometers
+                {:else}
+                    {clientInfo.distanceKm}
+                {/if}
+            </div>
         </div>
     </div>
 </div>
