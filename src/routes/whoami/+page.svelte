@@ -25,20 +25,24 @@
     }
     
     .info-grid {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 1rem;
         max-width: 800px;
         margin: 0 auto;
     }
     
+    .data-row {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        padding: 0.5rem 0;
+    }
+    
     .label {
         font-weight: bold;
-        text-align: right;
+        min-width: 200px;
     }
     
     .value {
-        text-align: left;
+        flex: 1;
     }
 
     h1, h2 {
@@ -65,38 +69,48 @@
     <div class="info-grid">
         <div class="section">
             <h2>Distance</h2>
-            <div class="label">Client to Worker:</div>
-            <div class="value">
-                {#if typeof clientInfo.distanceKm === 'number'}
-                    {clientInfo.distanceKm} kilometers
-                {:else}
-                    {clientInfo.distanceKm}
-                {/if}
+            <div class="data-row">
+                <div class="label">Client to Worker:</div>
+                <div class="value">
+                    {#if typeof clientInfo.distanceKm === 'number'}
+                        {clientInfo.distanceKm} kilometers
+                    {:else}
+                        {clientInfo.distanceKm}
+                    {/if}
+                </div>
             </div>
 
             <h2>Client Details (Your Browser)</h2>
-            <div class="label">IP Address:</div>
-            <div class="value">
-                {#await clientIPPromise}
-                    Loading...
-                {:then ip}
-                    {ip}
-                {:catch error}
-                    Error loading IP
-                {/await}
+            <div class="data-row">
+                <div class="label">IP Address:</div>
+                <div class="value">
+                    {#await clientIPPromise}
+                        Loading...
+                    {:then ip}
+                        {ip}
+                    {:catch error}
+                        Error loading IP
+                    {/await}
+                </div>
             </div>
             {#each Object.entries(clientInfo).filter(([key]) => !['ip', 'workerIP', 'workerLocation'].includes(key)) as [key, value]}
-                <div class="label">{key}:</div>
-                <div class="value">{value || 'N/A'}</div>
+                <div class="data-row">
+                    <div class="label">{key}:</div>
+                    <div class="value">{value || 'N/A'}</div>
+                </div>
             {/each}
             
             <h2>Worker Details (Cloudflare)</h2>
-            <div class="label">IP Address:</div>
-            <div class="value">{clientInfo.workerIP}</div>
+            <div class="data-row">
+                <div class="label">IP Address:</div>
+                <div class="value">{clientInfo.workerIP}</div>
+            </div>
             {#if clientInfo.workerLocation && typeof clientInfo.workerLocation === 'object'}
                 {#each Object.entries(clientInfo.workerLocation) as [key, value]}
-                    <div class="label">{key}:</div>
-                    <div class="value">{value || 'N/A'}</div>
+                    <div class="data-row">
+                        <div class="label">{key}:</div>
+                        <div class="value">{value || 'N/A'}</div>
+                    </div>
                 {/each}
             {/if}
             </div>
