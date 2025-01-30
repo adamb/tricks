@@ -2,6 +2,8 @@
     export let data;
     const { clientInfo } = data;
     
+    import { onMount } from 'svelte';
+
     async function getClientIP() {
         try {
             const response = await fetch('https://api.ipify.org');
@@ -14,6 +16,14 @@
     }
 
     let clientIPPromise = getClientIP();
+    let distanceDisplay = clientInfo.distanceKm;
+
+    onMount(async () => {
+        const clientIP = await clientIPPromise;
+        if (clientIP === clientInfo.workerIP) {
+            distanceDisplay = 0;
+        }
+    });
 </script>
 
 <style>
@@ -72,10 +82,10 @@
             <div class="data-row">
                 <div class="label">Client to Worker:</div>
                 <div class="value">
-                    {#if typeof clientInfo.distanceKm === 'number'}
-                        {clientInfo.distanceKm} kilometers
+                    {#if typeof distanceDisplay === 'number'}
+                        {distanceDisplay} kilometers
                     {:else}
-                        {clientInfo.distanceKm}
+                        {distanceDisplay}
                     {/if}
                 </div>
             </div>
