@@ -1,24 +1,24 @@
-export async function load({ request, platform }) {
-    // platform.context gives us access to the Cloudflare worker context
-    const cf = platform.request.cf;
+export async function load({ request }) {
+    // Get Cloudflare data from the request object
+    const cf = request.cf;
     
     return {
         clientInfo: {
-            ip: cf.ip,
-            country: cf.country,
-            city: cf.city,
-            continent: cf.continent,
-            latitude: cf.latitude,
-            longitude: cf.longitude,
-            timezone: cf.timezone,
-            region: cf.region,
-            regionCode: cf.regionCode,
-            asn: cf.asn,
-            asOrganization: cf.asOrganization,
-            postalCode: cf.postalCode,
-            httpProtocol: cf.httpProtocol,
-            tlsVersion: cf.tlsVersion,
-            browser: request.headers.get('user-agent')
+            ip: cf?.ip || 'Not available',
+            country: cf?.country || 'Not available',
+            city: cf?.city || 'Not available',
+            continent: cf?.continent || 'Not available',
+            latitude: cf?.latitude || 'Not available',
+            longitude: cf?.longitude || 'Not available',
+            timezone: cf?.timezone || 'Not available',
+            region: cf?.region || 'Not available',
+            regionCode: cf?.regionCode || 'Not available',
+            asn: cf?.asn || 'Not available',
+            asOrganization: cf?.asOrganization || 'Not available',
+            postalCode: cf?.postalCode || 'Not available',
+            httpProtocol: cf?.httpProtocol || 'Not available',
+            tlsVersion: cf?.tlsVersion || 'Not available',
+            browser: request.headers.get('user-agent') || 'Not available'
         }
     };
 }
