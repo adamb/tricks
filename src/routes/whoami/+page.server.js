@@ -11,15 +11,13 @@ export async function load({ request, platform }) {
         const ipifyResponse = await fetch('https://api.ipify.org');
         workerIP = await ipifyResponse.text();
         
-        // Get API key from platform env or Vite env
-        const apiKey = platform?.env?.IPAPI_KEY || import.meta.env.VITE_IPAPI_KEY;
-        if (!apiKey) {
-            throw new Error('IPAPI_KEY not found in environment variables');
-        }
-        
-        // Get worker IP location data from ipapi
-        const workerIpapiResponse = await fetch(`https://api.ipapi.com/${workerIP}?access_key=${apiKey}`);
+        // Get worker IP location data from ip-api.com
+        const workerIpapiResponse = await fetch(`http://ip-api.com/json/${workerIP}?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,query`);
         workerIpapiData = await workerIpapiResponse.json();
+        
+        if (workerIpapiData.status !== 'success') {
+            throw new Error(workerIpapiData.message || 'IP lookup failed');
+        }
     } catch (error) {
         console.error('Error fetching worker IP data:', error);
         workerIpapiData = { error: 'Failed to fetch worker location data' };
