@@ -5,11 +5,11 @@
     .container {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         min-height: 100vh;
         background-color: #000032;
-        padding: 2rem;
+        padding-top: 4rem;
     }
     .banner {
         font-family: Impact, sans-serif;
