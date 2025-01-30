@@ -19,15 +19,6 @@ export async function load({ request, platform }) {
         workerIpapiData = { error: 'Failed to fetch worker location data' };
     }
 
-    // Get client IP location data from ipapi
-    let clientIpapiData = {};
-    try {
-        const clientIpapiResponse = await fetch(`https://api.ipapi.com/${clientIP}?access_key=${platform.env.IPAPI_KEY}`);
-        clientIpapiData = await clientIpapiResponse.json();
-    } catch (error) {
-        console.error('Error fetching client IP data:', error);
-        clientIpapiData = { error: 'Failed to fetch client location data' };
-    }
 
     return {
         clientInfo: {
@@ -61,10 +52,7 @@ export async function load({ request, platform }) {
 
             // Worker IP Info
             workerIP: workerIP,
-            workerLocation: workerIpapiData,
-
-            // Client IP Location
-            clientLocation: clientIpapiData
+            workerLocation: workerIpapiData
         }
     };
 }
