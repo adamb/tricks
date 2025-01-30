@@ -74,14 +74,16 @@ export async function load({ request, platform }) {
             workerLocation: workerIpapiData,
             
             // Distance between client and worker
-            distanceKm: cf?.latitude && cf?.longitude && workerIpapiData?.lat && workerIpapiData?.lon 
-                ? Math.round(getDistanceFromLatLonInKm(
-                    cf.latitude,
-                    cf.longitude,
-                    workerIpapiData.lat,
-                    workerIpapiData.lon
-                  ))
-                : 'Not available'
+            distanceKm: cf?.ip === workerIP 
+                ? 0 
+                : (cf?.latitude && cf?.longitude && workerIpapiData?.lat && workerIpapiData?.lon 
+                    ? Math.round(getDistanceFromLatLonInKm(
+                        cf.latitude,
+                        cf.longitude,
+                        workerIpapiData.lat,
+                        workerIpapiData.lon
+                      ))
+                    : 'Not available')
         }
     };
 }
