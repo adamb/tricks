@@ -51,11 +51,15 @@
     <h1>Request Information</h1>
     <div class="info-grid">
         <div class="section">
-            <h2>Client IP</h2>
+            <h2>Client Details (Your Browser)</h2>
             <div class="label">IP Address:</div>
             <div class="value">{clientInfo.ip}</div>
+            {#each Object.entries(clientInfo).filter(([key]) => !['ip', 'workerIP', 'workerLocation'].includes(key)) as [key, value]}
+                <div class="label">{key}:</div>
+                <div class="value">{value || 'N/A'}</div>
+            {/each}
             
-            <h2>Worker IP</h2>
+            <h2>Worker Details (Cloudflare)</h2>
             <div class="label">IP Address:</div>
             <div class="value">{clientInfo.workerIP}</div>
             {#if clientInfo.workerLocation && typeof clientInfo.workerLocation === 'object'}
@@ -64,12 +68,6 @@
                     <div class="value">{value || 'N/A'}</div>
                 {/each}
             {/if}
-
-            <h2>Additional Details</h2>
-            {#each Object.entries(clientInfo).filter(([key]) => !['ip', 'workerIP', 'workerLocation'].includes(key)) as [key, value]}
-                <div class="label">{key}:</div>
-                <div class="value">{value || 'N/A'}</div>
-            {/each}
         </div>
     </div>
 </div>
