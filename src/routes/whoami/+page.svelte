@@ -38,16 +38,9 @@
 <div class="whoami-container">
     <h1>Client Information</h1>
     <div class="info-grid">
-        <div class="label">Headers:</div>
-        <div class="value">
-            {#each Object.entries(clientInfo.headers) as [key, value]}
-                <div><strong>{key}:</strong> {value || 'N/A'}</div>
-            {/each}
-        </div>
-        
-        <div class="label">CF Data:</div>
-        <div class="value">
-            <pre>{JSON.stringify(clientInfo.rawCf, null, 2)}</pre>
-        </div>
+        {#each Object.entries(clientInfo) as [key, value]}
+            <div class="label">{key}:</div>
+            <div class="value">{value || 'N/A'}</div>
+        {/each}
     </div>
 </div>
