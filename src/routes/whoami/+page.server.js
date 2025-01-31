@@ -23,13 +23,13 @@ export async function load({ request, platform }) {
     
     const coloInfo = dcColos[cf?.colo] || { name: 'Unknown', lat: 'Not available', lon: 'Not available' };
 
-    const clientLatitude = cf?.latitude || 'Not available';
-    const clientLongitude = cf?.longitude || 'Not available';
-    const coloLatitude = coloInfo.lat;
-    const coloLongitude = coloInfo.lon;
+    const clientLatitude = parseFloat(cf?.latitude) || 'Not available';
+    const clientLongitude = parseFloat(cf?.longitude) || 'Not available';
+    const coloLatitude = parseFloat(coloInfo.lat);
+    const coloLongitude = parseFloat(coloInfo.lon);
 
-    const distanceKm = (typeof clientLatitude === 'number' && typeof clientLongitude === 'number' &&
-                        typeof coloLatitude === 'number' && typeof coloLongitude === 'number')
+    const distanceKm = (!isNaN(clientLatitude) && !isNaN(clientLongitude) &&
+                        !isNaN(coloLatitude) && !isNaN(coloLongitude))
                         ? Math.round(getDistanceFromLatLonInKm(clientLatitude, clientLongitude, coloLatitude, coloLongitude))
                         : 'Not available';
 
