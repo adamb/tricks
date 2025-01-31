@@ -32,7 +32,6 @@ export async function load({ request, platform }) {
             // Cloudflare Worker Info
             datacenter: cf?.colo || 'Not available',
             coloName: coloInfo.name,
-            coloLocation: coloInfo.location,
             coloLatitude: coloInfo.lat,
             coloLongitude: coloInfo.lon
         }

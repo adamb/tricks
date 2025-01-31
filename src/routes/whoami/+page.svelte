@@ -84,26 +84,6 @@
                 <div class="value">{clientInfo.latitude}</div>
             </div>
             <div class="data-row">
-                <div class="label">Colo Location:</div>
-                <div class="value">{clientInfo.coloLocation}</div>
-            </div>
-            <div class="data-row">
-                <div class="label">Colo Latitude:</div>
-                <div class="value">{clientInfo.coloLatitude}</div>
-            </div>
-            <div class="data-row">
-                <div class="label">Colo Longitude:</div>
-                <div class="value">{clientInfo.coloLongitude}</div>
-            </div>
-            <div class="data-row">
-                <div class="label">Colo Name:</div>
-                <div class="value">{clientInfo.coloName}</div>
-            </div>
-            <div class="data-row">
-                <div class="label">Colo Location:</div>
-                <div class="value">{clientInfo.coloLocation}</div>
-            </div>
-            <div class="data-row">
                 <div class="label">Longitude:</div>
                 <div class="value">{clientInfo.longitude}</div>
             </div>
@@ -112,6 +92,18 @@
             <div class="data-row">
                 <div class="label">Datacenter (colo):</div>
                 <div class="value">{clientInfo.datacenter}</div>
+            </div>
+            <div class="data-row">
+                <div class="label">Colo Name:</div>
+                <div class="value">{clientInfo.coloName}</div>
+            </div>
+            <div class="data-row">
+                <div class="label">Colo Latitude:</div>
+                <div class="value">{clientInfo.coloLatitude}</div>
+            </div>
+            <div class="data-row">
+                <div class="label">Colo Longitude:</div>
+                <div class="value">{clientInfo.coloLongitude}</div>
             </div>
             </div>
         </div>
