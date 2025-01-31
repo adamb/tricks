@@ -21,7 +21,7 @@ export async function load({ request, platform }) {
     // Get Cloudflare data from the request object
     const cf = request.cf;
     
-    const coloInfo = dcColos[cf?.colo] || { name: 'Unknown', location: 'Unknown', lat: 'Not available', lon: 'Not available' };
+    const coloInfo = dcColos[cf?.colo] || { name: 'Unknown', lat: 'Not available', lon: 'Not available' };
 
     return {
         clientInfo: {
