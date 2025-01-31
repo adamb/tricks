@@ -95,7 +95,7 @@ export async function load({ request, platform }) {
                 coloLongitude: coloLongitude,
                 distanceKm: distanceKm
             },
-            stats
+            stats: coloStats
         };
     }
 
