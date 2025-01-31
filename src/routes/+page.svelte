@@ -69,6 +69,7 @@
                 from the user to the colo.  I found <a href="https://www.feitsui.com/en/article/26" class="trick-link">this article</a> which shows
                 all the data centers.  I could do some estimates.  I also thought it would be fun to collect this 
                 data and see where people are coming from and maybe even make a contest of it.  Or an animated map...
+                Check out the code on <a href="https://github.com/adamb/tricks" class="trick-link">GitHub</a>.
             </p>
         </li>
     </ul>
