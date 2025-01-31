@@ -33,6 +33,8 @@ export async function load({ request, platform }) {
                         ? Math.round(getDistanceFromLatLonInKm(clientLatitude, clientLongitude, coloLatitude, coloLongitude))
                         : 'Not available';
 
+    let coloStats = null;
+    
     // Store visit data in KV
     if (platform?.env?.VISITOR_STATS && distanceKm !== 'Not available') {
         const colo = cf?.colo || 'unknown';
@@ -49,7 +51,7 @@ export async function load({ request, platform }) {
 
         // Get all colos that have had visits
         const allKeys = await platform.env.VISITOR_STATS.list();
-        const coloStats = {};
+        coloStats = {};
         
         // Group keys by colo
         const coloVisits = {};
@@ -81,22 +83,6 @@ export async function load({ request, platform }) {
                 name: coloInfo.name
             };
         }
-
-        return {
-            clientInfo: {
-                // Client Geographic Info
-                latitude: clientLatitude,
-                longitude: clientLongitude,
-                
-                // Cloudflare Worker Info
-                datacenter: cf?.colo || 'Not available',
-                coloName: coloInfo.name,
-                coloLatitude: coloLatitude,
-                coloLongitude: coloLongitude,
-                distanceKm: distanceKm
-            },
-            stats: coloStats
-        };
     }
 
     return {
@@ -108,6 +94,7 @@ export async function load({ request, platform }) {
             coloLatitude: coloLatitude,
             coloLongitude: coloLongitude,
             distanceKm: distanceKm
-        }
+        },
+        stats: coloStats
     };
 }
