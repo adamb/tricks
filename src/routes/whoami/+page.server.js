@@ -36,6 +36,10 @@ export async function load({ request, platform }) {
     let coloStats = null;
     
     // Store visit data in KV
+    console.log('Platform env:', platform?.env);
+    console.log('KV binding available:', !!platform?.env?.VISITOR_STATS);
+    console.log('Distance:', distanceKm);
+    
     if (platform?.env?.VISITOR_STATS && distanceKm !== 'Not available') {
         const colo = cf?.colo || 'unknown';
         const timestamp = Date.now();
