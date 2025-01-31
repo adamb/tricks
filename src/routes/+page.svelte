@@ -66,7 +66,7 @@
                 a worker. The ipify.org call always returns the same IP address. 
                 Oh well. I guess that's why it's a Stupid Cloud Trick....</p>
             <p class="trick-description">I might update it to use cf.colo and just estimate the distance
-                from the user to the colo.  I found this article https://www.feitsui.com/en/article/26 which shows
+                from the user to the colo.  I found <a href="https://www.feitsui.com/en/article/26" class="trick-link">this article</a> which shows
                 all the data centers.  I could do some estimates.  I also thought it would be fun to collect this 
                 data and see where people are coming from and maybe even make a contest of it.  Or an animated map...
             </p>
