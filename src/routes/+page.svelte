@@ -55,7 +55,7 @@
     <ul class="tricks-list">
         <li>
             <a href="/whoami" class="trick-link">Who Am I?</a>
-            <p class="trick-description">Shows your location, the Cloudflare worker's location, and the distance between them. See how Cloudflare's edge network serves your request from the nearest datacenter.</p>
+            <p class="trick-description">A real-time demonstration of Cloudflare's edge network in action. Gets your IP address directly from your browser using ipify.org, then shows where the Cloudflare worker handling your request is located. Calculates the distance between you and the worker, and displays detailed information about both endpoints including IP addresses, geographic locations, and which Cloudflare datacenter (colo) is serving your request.</p>
         </li>
     </ul>
 </div>
