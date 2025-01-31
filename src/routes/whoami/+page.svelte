@@ -90,14 +90,6 @@
 
             <h2>Worker Location</h2>
             <div class="data-row">
-                <div class="label">Latitude:</div>
-                <div class="value">{clientInfo.workerLocation.lat}</div>
-            </div>
-            <div class="data-row">
-                <div class="label">Longitude:</div>
-                <div class="value">{clientInfo.workerLocation.lon}</div>
-            </div>
-            <div class="data-row">
                 <div class="label">Datacenter (colo):</div>
                 <div class="value">{clientInfo.datacenter}</div>
             </div>
