@@ -47,22 +47,40 @@ export async function load({ request, platform }) {
             })
         );
 
-        // Get recent visits (last 24 hours)
-        const listOpts = {
-            prefix: `visit:${colo}:`,
-            limit: 1000
-        };
-        const visits = await platform.env.VISITOR_STATS.list(listOpts);
-        const recentVisits = visits.keys
-            .filter(key => (timestamp - parseInt(key.name.split(':')[2])) < 24 * 60 * 60 * 1000)
-            .map(key => parseInt(key.name.split(':')[2]));
+        // Get all colos that have had visits
+        const allKeys = await platform.env.VISITOR_STATS.list();
+        const coloStats = {};
+        
+        // Group keys by colo
+        const coloVisits = {};
+        allKeys.keys.forEach(key => {
+            const [_, visitColo, visitTime] = key.name.split(':');
+            if (!coloVisits[visitColo]) {
+                coloVisits[visitColo] = [];
+            }
+            coloVisits[visitColo].push(parseInt(visitTime));
+        });
 
-        // Calculate statistics
-        const stats = {
-            totalVisitorsToThisColo: recentVisits.length,
-            averageDistance: Math.round(distanceKm), // For now, just the current distance
-            recentVisits: recentVisits.length
-        };
+        // Calculate stats for each colo
+        for (const [coloCd, visits] of Object.entries(coloVisits)) {
+            const recentVisits = visits.filter(time => (timestamp - time) < 24 * 60 * 60 * 1000);
+            coloStats[coloCd] = {
+                totalVisitorsToThisColo: recentVisits.length,
+                averageDistance: Math.round(distanceKm), // Using current distance for now
+                recentVisits: recentVisits.length,
+                name: (dcColos[coloCd] || {}).name || 'Unknown Location'
+            };
+        }
+
+        // Ensure current colo exists in stats even if no visits
+        if (!coloStats[colo]) {
+            coloStats[colo] = {
+                totalVisitorsToThisColo: 1,
+                averageDistance: Math.round(distanceKm),
+                recentVisits: 1,
+                name: coloInfo.name
+            };
+        }
 
         return {
             clientInfo: {

@@ -72,11 +72,60 @@
         border: 1px solid #ffcc00;
         border-radius: 4px;
     }
+
+    .current-colo {
+        background-color: rgba(255, 204, 0, 0.1);
+    }
+
+    .colo-stats {
+        margin: 1rem 0;
+        padding: 0.5rem;
+        border-bottom: 1px solid rgba(255, 204, 0, 0.3);
+    }
+
+    .colo-stats:last-child {
+        border-bottom: none;
+    }
+
+    .all-colos h3 {
+        color: #ffcc00;
+        font-size: 1.1rem;
+        margin: 0.5rem 0;
+    }
 </style>
 
 <div class="whoami-container">
-    <h1>Request Information</h1>
+    <h1>Edge Network Statistics</h1>
     <div class="info-grid">
+        {#if data.stats}
+            <div class="section current-colo">
+                <h2>You're visiting from {clientInfo.coloName} ({clientInfo.datacenter})</h2>
+                <div class="data-row">
+                    <div class="label">Visitors in last 24h:</div>
+                    <div class="value">{data.stats[clientInfo.datacenter]?.totalVisitorsToThisColo || 0}</div>
+                </div>
+                <div class="data-row">
+                    <div class="label">Your distance:</div>
+                    <div class="value">{clientInfo.distanceKm} kilometers</div>
+                </div>
+            </div>
+
+            <div class="section all-colos">
+                <h2>All Datacenter Activity (Last 24h)</h2>
+                {#each Object.entries(data.stats).sort(([,a], [,b]) => b.totalVisitorsToThisColo - a.totalVisitorsToThisColo) as [coloCd, stats]}
+                    {#if coloCd !== clientInfo.datacenter}
+                        <div class="colo-stats">
+                            <h3>{stats.name} ({coloCd})</h3>
+                            <div class="data-row">
+                                <div class="label">Visitors:</div>
+                                <div class="value">{stats.totalVisitorsToThisColo}</div>
+                            </div>
+                        </div>
+                    {/if}
+                {/each}
+            </div>
+        {/if}
+
         <div class="section">
             <h2>Distance to Colo</h2>
             <div class="data-row">
