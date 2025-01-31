@@ -48,6 +48,12 @@
         max-width: 600px;
         opacity: 0.8;
     }
+
+    .trick-description .trick-link {
+        font-size: inherit;
+        padding: 0;
+        text-decoration: underline;
+    }
 </style>
 
 <div class="container">
