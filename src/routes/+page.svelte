@@ -40,6 +40,14 @@
         border-color: #ffcc00;
         background: rgba(255, 204, 0, 0.1);
     }
+
+    .trick-description {
+        color: #ffcc00;
+        font-size: 16px;
+        margin: 0.5rem 0 1.5rem 1.5rem;
+        max-width: 600px;
+        opacity: 0.8;
+    }
 </style>
 
 <div class="container">
@@ -47,6 +55,7 @@
     <ul class="tricks-list">
         <li>
             <a href="/whoami" class="trick-link">Who Am I?</a>
+            <p class="trick-description">Shows your location, the Cloudflare worker's location, and the distance between them. See how Cloudflare's edge network serves your request from the nearest datacenter.</p>
         </li>
     </ul>
 </div>
