@@ -16,15 +16,6 @@ function deg2rad(deg) {
     return deg * (Math.PI/180);
 }
 
-const dcColosPath = path.join(process.cwd(), 'src', 'lib', 'DC-Colos.json');
-let dcColos = {};
-
-try {
-    const data = fs.readFileSync(dcColosPath, 'utf8');
-    dcColos = JSON.parse(data);
-} catch (error) {
-    console.error('Error reading DC-Colos.json:', error);
-}
 
 export async function load({ request, platform }) {
     // Get Cloudflare data from the request object
