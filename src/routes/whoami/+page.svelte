@@ -78,7 +78,11 @@
     <h1>Request Information</h1>
     <div class="info-grid">
         <div class="section">
-            <h2>Client Location</h2>
+            <h2>Distance to Colo</h2>
+            <div class="data-row">
+                <div class="label">Distance:</div>
+                <div class="value">{clientInfo.distanceKm} kilometers</div>
+            </div>
             <div class="data-row">
                 <div class="label">Latitude:</div>
                 <div class="value">{clientInfo.latitude}</div>

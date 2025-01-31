@@ -23,17 +23,28 @@ export async function load({ request, platform }) {
     
     const coloInfo = dcColos[cf?.colo] || { name: 'Unknown', lat: 'Not available', lon: 'Not available' };
 
+    const clientLatitude = cf?.latitude || 'Not available';
+    const clientLongitude = cf?.longitude || 'Not available';
+    const coloLatitude = coloInfo.lat;
+    const coloLongitude = coloInfo.lon;
+
+    const distanceKm = (typeof clientLatitude === 'number' && typeof clientLongitude === 'number' &&
+                        typeof coloLatitude === 'number' && typeof coloLongitude === 'number')
+                        ? Math.round(getDistanceFromLatLonInKm(clientLatitude, clientLongitude, coloLatitude, coloLongitude))
+                        : 'Not available';
+
     return {
         clientInfo: {
             // Client Geographic Info
-            latitude: cf?.latitude || 'Not available',
-            longitude: cf?.longitude || 'Not available',
+            latitude: clientLatitude,
+            longitude: clientLongitude,
             
             // Cloudflare Worker Info
             datacenter: cf?.colo || 'Not available',
             coloName: coloInfo.name,
-            coloLatitude: coloInfo.lat,
-            coloLongitude: coloInfo.lon
+            coloLatitude: coloLatitude,
+            coloLongitude: coloLongitude,
+            distanceKm: distanceKm
         }
     };
 }
