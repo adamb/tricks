@@ -78,55 +78,29 @@
     <h1>Request Information</h1>
     <div class="info-grid">
         <div class="section">
-            <h2>Distance</h2>
+            <h2>Client Location</h2>
             <div class="data-row">
-                <div class="label">Client to Worker:</div>
-                <div class="value">
-                    {#if typeof distanceDisplay === 'number'}
-                        {distanceDisplay} kilometers
-                    {:else}
-                        {distanceDisplay}
-                    {/if}
-                </div>
+                <div class="label">Latitude:</div>
+                <div class="value">{clientInfo.latitude}</div>
+            </div>
+            <div class="data-row">
+                <div class="label">Longitude:</div>
+                <div class="value">{clientInfo.longitude}</div>
             </div>
 
-            <h2>Client Details (Your Browser)</h2>
+            <h2>Worker Location</h2>
             <div class="data-row">
-                <div class="label">IP Address:</div>
-                <div class="value">
-                    {#await clientIPPromise}
-                        Loading...
-                    {:then ip}
-                        {ip}
-                    {:catch error}
-                        Error loading IP
-                    {/await}
-                </div>
+                <div class="label">Latitude:</div>
+                <div class="value">{clientInfo.workerLocation.lat}</div>
             </div>
-            {#each Object.entries(clientInfo).filter(([key]) => !['ip', 'workerIP', 'workerLocation'].includes(key)) as [key, value]}
-                <div class="data-row">
-                    <div class="label">{key}:</div>
-                    <div class="value">{value || 'N/A'}</div>
-                </div>
-            {/each}
-            
-            <h2>Worker Details (Cloudflare)</h2>
             <div class="data-row">
-                <div class="label">IP Address:</div>
-                <div class="value">{clientInfo.workerIP}</div>
+                <div class="label">Longitude:</div>
+                <div class="value">{clientInfo.workerLocation.lon}</div>
             </div>
             <div class="data-row">
                 <div class="label">Datacenter (colo):</div>
                 <div class="value">{clientInfo.datacenter}</div>
             </div>
-            {#if clientInfo.workerLocation && typeof clientInfo.workerLocation === 'object'}
-                {#each Object.entries(clientInfo.workerLocation) as [key, value]}
-                    <div class="data-row">
-                        <div class="label">{key}:</div>
-                        <div class="value">{value || 'N/A'}</div>
-                    </div>
-                {/each}
-            {/if}
             </div>
         </div>
 </div>
