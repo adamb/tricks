@@ -21,7 +21,7 @@ export async function load({ request, platform }) {
     // Get Cloudflare data from the request object
     const cf = request.cf;
     
-    const coloInfo = dcColos[cf?.colo] || { name: 'Unknown', location: 'Unknown' };
+    const coloInfo = dcColos[cf?.colo] || { name: 'Unknown', location: 'Unknown', lat: 'Not available', lon: 'Not available' };
 
     return {
         clientInfo: {
@@ -32,7 +32,9 @@ export async function load({ request, platform }) {
             // Cloudflare Worker Info
             datacenter: cf?.colo || 'Not available',
             coloName: coloInfo.name,
-            coloLocation: coloInfo.location
+            coloLocation: coloInfo.location,
+            coloLatitude: coloInfo.lat,
+            coloLongitude: coloInfo.lon
         }
     };
 }
