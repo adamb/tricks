@@ -56,7 +56,14 @@
         <li>
             <a href="/whoami" class="trick-link">Who Am I?</a>
             <p class="trick-description">A real-time demonstration of Cloudflare's edge network in action. Gets your IP address directly from your browser using ipify.org, then shows where the Cloudflare worker handling your request is located. Calculates the distance between you and the worker, and displays detailed information about both endpoints including IP addresses, geographic locations, and which Cloudflare datacenter (colo) is serving your request.</p>
-            <p class="trick-description">And it doesn't work. Turns out you can't get the IP address of a worker. The ipify.org call always returns the same IP address. Oh well. I guess that's why it's a Stupid Cloud Trick....</p>
+            <p class="trick-description">And it doesn't work. Turns out you can't get the IP address of 
+                a worker. The ipify.org call always returns the same IP address. 
+                Oh well. I guess that's why it's a Stupid Cloud Trick....</p>
+            <p class="trick-description">I might update it to use cf.colo and just estimate the distance
+                from the user to the colo.  I found this article https://www.feitsui.com/en/article/26 which shows
+                all the data centers.  I could do some estimates.  I also thought it would be fun to collect this 
+                data and see where people are coming from and maybe even make a contest of it.  Or an animated map...
+            </p>
         </li>
     </ul>
 </div>
