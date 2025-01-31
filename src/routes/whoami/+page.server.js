@@ -33,13 +33,58 @@ export async function load({ request, platform }) {
                         ? Math.round(getDistanceFromLatLonInKm(clientLatitude, clientLongitude, coloLatitude, coloLongitude))
                         : 'Not available';
 
+    // Store visit data in KV
+    if (platform?.env?.VISITOR_STATS && distanceKm !== 'Not available') {
+        const colo = cf?.colo || 'unknown';
+        const timestamp = Date.now();
+        
+        // Store this visit
+        await platform.env.VISITOR_STATS.put(
+            `visit:${colo}:${timestamp}`,
+            JSON.stringify({
+                distance: distanceKm,
+                timestamp
+            })
+        );
+
+        // Get recent visits (last 24 hours)
+        const listOpts = {
+            prefix: `visit:${colo}:`,
+            limit: 1000
+        };
+        const visits = await platform.env.VISITOR_STATS.list(listOpts);
+        const recentVisits = visits.keys
+            .filter(key => (timestamp - parseInt(key.name.split(':')[2])) < 24 * 60 * 60 * 1000)
+            .map(key => parseInt(key.name.split(':')[2]));
+
+        // Calculate statistics
+        const stats = {
+            totalVisitorsToThisColo: recentVisits.length,
+            averageDistance: Math.round(distanceKm), // For now, just the current distance
+            recentVisits: recentVisits.length
+        };
+
+        return {
+            clientInfo: {
+                // Client Geographic Info
+                latitude: clientLatitude,
+                longitude: clientLongitude,
+                
+                // Cloudflare Worker Info
+                datacenter: cf?.colo || 'Not available',
+                coloName: coloInfo.name,
+                coloLatitude: coloLatitude,
+                coloLongitude: coloLongitude,
+                distanceKm: distanceKm
+            },
+            stats
+        };
+    }
+
     return {
         clientInfo: {
-            // Client Geographic Info
             latitude: clientLatitude,
             longitude: clientLongitude,
-            
-            // Cloudflare Worker Info
             datacenter: cf?.colo || 'Not available',
             coloName: coloInfo.name,
             coloLatitude: coloLatitude,

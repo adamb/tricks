@@ -110,5 +110,23 @@
                 <div class="value">{clientInfo.coloLongitude}</div>
             </div>
             </div>
+
+            {#if data.stats}
+                <div class="section">
+                    <h2>Visitor Statistics</h2>
+                    <div class="data-row">
+                        <div class="label">Total Visitors to this Colo:</div>
+                        <div class="value">{data.stats.totalVisitorsToThisColo}</div>
+                    </div>
+                    <div class="data-row">
+                        <div class="label">Average Distance:</div>
+                        <div class="value">{data.stats.averageDistance} kilometers</div>
+                    </div>
+                    <div class="data-row">
+                        <div class="label">Recent Visits Analyzed:</div>
+                        <div class="value">{data.stats.recentVisits}</div>
+                    </div>
+                </div>
+            {/if}
         </div>
 </div>
