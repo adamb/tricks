@@ -1,3 +1,6 @@
+import fs from 'fs';
+import path from 'path';
+
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     const R = 6371; // Radius of the earth in km
     const dLat = deg2rad(lat2-lat1);
@@ -12,6 +15,16 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 
 function deg2rad(deg) {
     return deg * (Math.PI/180);
+}
+
+const dcColosPath = path.join(process.cwd(), 'src', 'lib', 'DC-Colos.json');
+let dcColos = {};
+
+try {
+    const data = fs.readFileSync(dcColosPath, 'utf8');
+    dcColos = JSON.parse(data);
+} catch (error) {
+    console.error('Error reading DC-Colos.json:', error);
 }
 
 export async function load({ request, platform }) {
