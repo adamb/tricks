@@ -65,7 +65,7 @@
         color: #ffcc00;
         font-size: 16px;
         margin-left: 1rem;
-        animation: bounce 1s 3;  /* Run animation 3 times only */
+        animation: bounce 1s 1;  
     }
 </style>
 
