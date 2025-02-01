@@ -93,14 +93,19 @@ export async function load({ request, platform }) {
             const averageDistance = validDistances.length > 0
                 ? Math.round(validDistances.reduce((a, b) => a + b, 0) / validDistances.length)
                 : 0;
-            const maxDistance = validDistances.length > 0
+            const previousMaxDistance = validDistances.length > 0
                 ? Math.round(Math.max(...validDistances))
                 : 0;
+            
+            // Check if current visitor sets new max for their colo
+            const isNewMax = coloCd === colo && distanceKm > previousMaxDistance;
+            const maxDistance = isNewMax ? distanceKm : previousMaxDistance;
 
             coloStats[coloCd] = {
                 totalVisitorsToThisColo: visits.length,
                 averageDistance,
                 maxDistance,
+                isNewMax,
                 recentVisits: visits.length,
                 name: (dcColos[coloCd] || {}).name || 'Unknown Location'
             };

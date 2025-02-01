@@ -109,6 +109,12 @@
     .colo-stats .label {
         color: #ffcc00;
     }
+
+    .new-record {
+        color: #ffcc00;
+        font-weight: bold;
+        margin-left: 1rem;
+    }
 </style>
 
 <div class="whoami-container">
@@ -124,7 +130,12 @@
                     <div class="colo-stats" class:current-colo={coloCd === clientInfo.datacenter}>
                         <div class="data-row">
                             <div class="label">{stats.name} ({coloCd})</div>
-                            <div class="value">{stats.totalVisitorsToThisColo} visitors, {stats.averageDistance}km avg, {stats.maxDistance}km max</div>
+                            <div class="value">
+                                {stats.totalVisitorsToThisColo} visitors, {stats.averageDistance}km avg, {stats.maxDistance}km max
+                                {#if stats.isNewMax}
+                                    <span class="new-record">🎉 New distance record!</span>
+                                {/if}
+                            </div>
                         </div>
                     </div>
                 {/each}
