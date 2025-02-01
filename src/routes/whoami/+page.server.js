@@ -79,9 +79,24 @@ export async function load({ request, platform }) {
 
         // Calculate stats for each colo
         for (const [coloCd, visits] of Object.entries(coloVisits)) {
+            // Get all visit data for this colo
+            const visitDistances = await Promise.all(
+                visits.map(async (time) => {
+                    const key = `visit:${coloCd}:${time}`;
+                    const data = await platform.env.VISITOR_STATS.get(key, { type: 'json' });
+                    return data?.distance || null;
+                })
+            );
+            
+            // Filter out null values and calculate average
+            const validDistances = visitDistances.filter(d => d !== null);
+            const averageDistance = validDistances.length > 0
+                ? Math.round(validDistances.reduce((a, b) => a + b, 0) / validDistances.length)
+                : 0;
+
             coloStats[coloCd] = {
                 totalVisitorsToThisColo: visits.length,
-                averageDistance: Math.round(distanceKm), // Using current distance for now
+                averageDistance,
                 recentVisits: visits.length,
                 name: (dcColos[coloCd] || {}).name || 'Unknown Location'
             };
