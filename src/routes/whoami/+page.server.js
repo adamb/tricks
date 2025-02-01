@@ -34,6 +34,7 @@ export async function load({ request, platform }) {
                         : 'Not available';
 
     let coloStats = null;
+    let visitKey = null;
     
     // Store visit data in KV
     console.log('Platform env:', platform?.env);
@@ -45,7 +46,7 @@ export async function load({ request, platform }) {
         const timestamp = Date.now();
         
         // Create visit key
-        const visitKey = `visit:${colo}:${timestamp}`;
+        visitKey = `visit:${colo}:${timestamp}`;
         
         // Store this visit
         await platform.env.VISITOR_STATS.put(
