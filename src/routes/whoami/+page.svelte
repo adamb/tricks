@@ -124,7 +124,7 @@
                     <div class="colo-stats" class:current-colo={coloCd === clientInfo.datacenter}>
                         <div class="data-row">
                             <div class="label">{stats.name} ({coloCd})</div>
-                            <div class="value">{stats.totalVisitorsToThisColo} visitors, {stats.averageDistance}km avg</div>
+                            <div class="value">{stats.totalVisitorsToThisColo} visitors, {stats.averageDistance}km avg, {stats.maxDistance}km max</div>
                         </div>
                     </div>
                 {/each}

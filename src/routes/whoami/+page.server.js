@@ -88,15 +88,19 @@ export async function load({ request, platform }) {
                 })
             );
             
-            // Filter out null values and calculate average
+            // Filter out null values and calculate stats
             const validDistances = visitDistances.filter(d => d !== null);
             const averageDistance = validDistances.length > 0
                 ? Math.round(validDistances.reduce((a, b) => a + b, 0) / validDistances.length)
+                : 0;
+            const maxDistance = validDistances.length > 0
+                ? Math.round(Math.max(...validDistances))
                 : 0;
 
             coloStats[coloCd] = {
                 totalVisitorsToThisColo: visits.length,
                 averageDistance,
+                maxDistance,
                 recentVisits: visits.length,
                 name: (dcColos[coloCd] || {}).name || 'Unknown Location'
             };
