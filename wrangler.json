@@ -7,7 +7,7 @@
     "enabled": true
   },
   "vars": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "development"
   },
   "kv_namespaces": [
     {
