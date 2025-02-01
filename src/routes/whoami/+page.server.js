@@ -44,9 +44,12 @@ export async function load({ request, platform }) {
         const colo = cf?.colo || 'unknown';
         const timestamp = Date.now();
         
+        // Create visit key
+        const visitKey = `visit:${colo}:${timestamp}`;
+        
         // Store this visit
         await platform.env.VISITOR_STATS.put(
-            `visit:${colo}:${timestamp}`,
+            visitKey,
             JSON.stringify({
                 distance: distanceKm
             })
@@ -96,7 +99,8 @@ export async function load({ request, platform }) {
             coloName: coloInfo.name,
             coloLatitude: coloLatitude,
             coloLongitude: coloLongitude,
-            distanceKm: distanceKm
+            distanceKm: distanceKm,
+            visitKey: platform?.env?.VISITOR_STATS ? `visit:${cf?.colo}:${Date.now()}` : null
         },
         stats: coloStats
     };
