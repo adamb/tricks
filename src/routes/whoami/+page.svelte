@@ -121,14 +121,10 @@
     <div class="info-grid">
         {#if data.stats}
             <div class="section current-colo">
-                <h2>You're visiting from {clientInfo.coloName} ({clientInfo.datacenter})</h2>
+                <h2>You're {clientInfo.distanceKm} km from {clientInfo.coloName} ({clientInfo.datacenter})</h2>
                 <div class="data-row">
                     <div class="label">Total Visitors:</div>
                     <div class="value">{data.stats[clientInfo.datacenter]?.totalVisitorsToThisColo || 0}</div>
-                </div>
-                <div class="data-row">
-                    <div class="label">Your distance:</div>
-                    <div class="value">{clientInfo.distanceKm} kilometers</div>
                 </div>
             </div>
 
@@ -148,56 +144,5 @@
             </div>
         {/if}
 
-        <div class="section">
-            <h2>Distance to Colo</h2>
-            <div class="data-row">
-                <div class="label">Distance:</div>
-                <div class="value">{clientInfo.distanceKm} kilometers</div>
-            </div>
-            <div class="data-row">
-                <div class="label">Latitude:</div>
-                <div class="value">{clientInfo.latitude}</div>
-            </div>
-            <div class="data-row">
-                <div class="label">Longitude:</div>
-                <div class="value">{clientInfo.longitude}</div>
-            </div>
-
-            <h2>Worker Location</h2>
-            <div class="data-row">
-                <div class="label">Datacenter (colo):</div>
-                <div class="value">{clientInfo.datacenter}</div>
-            </div>
-            <div class="data-row">
-                <div class="label">Colo Name:</div>
-                <div class="value">{clientInfo.coloName}</div>
-            </div>
-            <div class="data-row">
-                <div class="label">Colo Latitude:</div>
-                <div class="value">{clientInfo.coloLatitude}</div>
-            </div>
-            <div class="data-row">
-                <div class="label">Colo Longitude:</div>
-                <div class="value">{clientInfo.coloLongitude}</div>
-            </div>
-            </div>
-
-            {#if data.stats}
-                <div class="section">
-                    <h2>Visitor Statistics</h2>
-                    <div class="data-row">
-                        <div class="label">Total Visitors to this Colo:</div>
-                        <div class="value">{data.stats.totalVisitorsToThisColo}</div>
-                    </div>
-                    <div class="data-row">
-                        <div class="label">Average Distance:</div>
-                        <div class="value">{data.stats.averageDistance} kilometers</div>
-                    </div>
-                    <div class="data-row">
-                        <div class="label">Recent Visits Analyzed:</div>
-                        <div class="value">{data.stats.recentVisits}</div>
-                    </div>
-                </div>
-            {/if}
         </div>
 </div>
