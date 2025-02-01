@@ -100,7 +100,7 @@ export async function load({ request, platform }) {
             coloLatitude: coloLatitude,
             coloLongitude: coloLongitude,
             distanceKm: distanceKm,
-            visitKey: platform?.env?.VISITOR_STATS ? `visit:${cf?.colo}:${Date.now()}` : null
+            visitKey: visitKey || null
         },
         stats: coloStats
     };
