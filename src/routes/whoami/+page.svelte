@@ -132,7 +132,9 @@
                             <div class="label">{stats.name} ({coloCd})</div>
                             <div class="value">
                                 {stats.totalVisitorsToThisColo} visitors, {stats.averageDistance}km avg, {stats.maxDistance}km max
-                                {#if stats.isNewMax}
+                                {#if stats.isFirstVisitor}
+                                    <span class="new-record">🎉 First visitor ever!</span>
+                                {:else if stats.isNewMax}
                                     <span class="new-record">🎉 New distance record!</span>
                                 {/if}
                             </div>

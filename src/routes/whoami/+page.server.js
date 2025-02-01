@@ -101,11 +101,15 @@ export async function load({ request, platform }) {
             const isNewMax = coloCd === colo && distanceKm > previousMaxDistance;
             const maxDistance = isNewMax ? distanceKm : previousMaxDistance;
 
+            // Check if this is the first visitor
+            const isFirstVisitor = coloCd === colo && visits.length === 1;
+
             coloStats[coloCd] = {
                 totalVisitorsToThisColo: visits.length,
                 averageDistance,
                 maxDistance,
                 isNewMax,
+                isFirstVisitor,
                 recentVisits: visits.length,
                 name: (dcColos[coloCd] || {}).name || 'Unknown Location'
             };
