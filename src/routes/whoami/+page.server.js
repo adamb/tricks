@@ -120,6 +120,9 @@ export async function load({ request, platform }) {
             coloStats[colo] = {
                 totalVisitorsToThisColo: 1,
                 averageDistance: Math.round(distanceKm),
+                maxDistance: distanceKm,
+                isNewMax: true,  // It's automatically a record for a new colo
+                isFirstVisitor: true,  // It's automatically the first visitor
                 recentVisits: 1,
                 name: coloInfo.name
             };
