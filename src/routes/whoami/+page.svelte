@@ -23,6 +23,28 @@
         if (clientIP === clientInfo.workerIP) {
             distanceDisplay = 0;
         }
+        
+        // Update visit data with client IP if we have a visit key
+        if (clientIP && clientInfo.visitKey) {
+            try {
+                const response = await fetch('/whoami/api/visit/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        visitKey: clientInfo.visitKey,
+                        clientIP
+                    })
+                });
+                
+                if (!response.ok) {
+                    console.error('Failed to update visit data:', await response.json());
+                }
+            } catch (error) {
+                console.error('Error updating visit data:', error);
+            }
+        }
     });
 </script>
 
