@@ -77,13 +77,10 @@
         flex: 1;
     }
 
-    h1, h2 {
+    h2 {
         text-align: center;
         color: #ffcc00;
         margin-bottom: 2rem;
-    }
-
-    h2 {
         font-size: 1.5rem;
         margin-top: 2rem;
     }
