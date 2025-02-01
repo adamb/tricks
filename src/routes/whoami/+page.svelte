@@ -130,12 +130,6 @@
                     <div class="label">Your distance:</div>
                     <div class="value">{clientInfo.distanceKm} kilometers</div>
                 </div>
-                {#if clientInfo.visitKey}
-                    <div class="data-row">
-                        <div class="label">Visit Key:</div>
-                        <div class="value">{clientInfo.visitKey}</div>
-                    </div>
-                {/if}
             </div>
 
             <div class="section all-colos">
