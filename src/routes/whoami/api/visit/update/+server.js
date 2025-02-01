@@ -16,11 +16,10 @@ export async function POST({ request, platform }) {
     }
 
     try {
-        // Validate the secret - accept either platform or vite secret
-        const platformSecret = platform.env.UPDATE_API_SECRET;
-        const viteSecret = platform.env.VITE_UPDATE_API_SECRET;
+        // Get the secret from platform env or vite env
+        const validSecret = platform.env.UPDATE_API_SECRET || platform.env.VITE_UPDATE_API_SECRET;
         
-        if (secret !== platformSecret && secret !== viteSecret) {
+        if (!validSecret || secret !== validSecret) {
             return new Response(JSON.stringify({ error: 'Invalid secret' }), {
                 status: 403,
                 headers: { 'Content-Type': 'application/json' }
