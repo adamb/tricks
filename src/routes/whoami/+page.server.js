@@ -56,13 +56,20 @@ export async function load({ request, platform }) {
             })
         );
 
-        // Get all colos that have had visits
-        const allKeys = await platform.env.VISITOR_STATS.list();
+        // Get all colos that have had visits (handling pagination)
+        let allKeys = [];
+        let cursor;
+        do {
+            const listResult = await platform.env.VISITOR_STATS.list({ cursor, limit: 1000 });
+            allKeys.push(...listResult.keys);
+            cursor = listResult.cursor;
+        } while (cursor);
+
         coloStats = {};
         
         // Group keys by colo
         const coloVisits = {};
-        allKeys.keys.forEach(key => {
+        allKeys.forEach(key => {
             const [_, visitColo, visitTime] = key.name.split(':');
             if (!coloVisits[visitColo]) {
                 coloVisits[visitColo] = [];
