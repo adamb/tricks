@@ -72,11 +72,10 @@ export async function load({ request, platform }) {
 
         // Calculate stats for each colo
         for (const [coloCd, visits] of Object.entries(coloVisits)) {
-            const recentVisits = visits.filter(time => (timestamp - time) < 24 * 60 * 60 * 1000);
             coloStats[coloCd] = {
-                totalVisitorsToThisColo: recentVisits.length,
+                totalVisitorsToThisColo: visits.length,
                 averageDistance: Math.round(distanceKm), // Using current distance for now
-                recentVisits: recentVisits.length,
+                recentVisits: visits.length,
                 name: (dcColos[coloCd] || {}).name || 'Unknown Location'
             };
         }

@@ -123,7 +123,7 @@
             <div class="section current-colo">
                 <h2>You're visiting from {clientInfo.coloName} ({clientInfo.datacenter})</h2>
                 <div class="data-row">
-                    <div class="label">Visitors in last 24h:</div>
+                    <div class="label">Total Visitors:</div>
                     <div class="value">{data.stats[clientInfo.datacenter]?.totalVisitorsToThisColo || 0}</div>
                 </div>
                 <div class="data-row">
@@ -133,7 +133,7 @@
             </div>
 
             <div class="section all-colos">
-                <h2>All Datacenter Activity (Last 24h)</h2>
+                <h2>All Datacenter Activity</h2>
                 {#each Object.entries(data.stats).sort(([,a], [,b]) => b.totalVisitorsToThisColo - a.totalVisitorsToThisColo) as [coloCd, stats]}
                     {#if coloCd !== clientInfo.datacenter}
                         <div class="colo-stats">
