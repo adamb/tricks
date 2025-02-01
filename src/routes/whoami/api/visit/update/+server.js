@@ -1,4 +1,8 @@
 export async function POST({ request, platform }) {
+    
+    // Get the secret from platform env or vite env
+    const validSecret = platform.env.UPDATE_API_SECRET || import.meta.env.VITE_UPDATE_API_SECRET;
+
     if (!platform?.env?.VISITOR_STATS || !platform?.env?.UPDATE_API_SECRET) {
         return new Response(JSON.stringify({ error: 'Required environment variables not available' }), {
             status: 500,
@@ -16,8 +20,6 @@ export async function POST({ request, platform }) {
     }
 
     try {
-        // Get the secret from platform env or vite env
-        const validSecret = platform.env.UPDATE_API_SECRET || platform.env.VITE_UPDATE_API_SECRET;
         
         if (!validSecret || secret !== validSecret) {
             return new Response(JSON.stringify({ error: 'Invalid secret' }), {
