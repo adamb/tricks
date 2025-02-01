@@ -54,13 +54,26 @@
         padding: 0;
         text-decoration: underline;
     }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(10px); }
+    }
+
+    .click-here {
+        display: inline-block;
+        color: #ffcc00;
+        font-size: 16px;
+        margin-left: 1rem;
+        animation: bounce 1s infinite;
+    }
 </style>
 
 <div class="container">
     <div class="banner">Stupid Cloud Tricks</div>
     <ul class="tricks-list">
         <li>
-            <a href="/whoami" class="trick-link">Who Am I?</a>
+            <a href="/whoami" class="trick-link">Who Am I?<span class="click-here">← Click here!</span></a>
             <p class="trick-description">A real-time demonstration of Cloudflare's edge network in action. 
                 Gets your location (lat/lon) from the Cloudflare request object.  The same request object
                 gives us the colo of the Cloudflare data center where your request is being handled. 
