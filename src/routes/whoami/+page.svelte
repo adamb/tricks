@@ -126,20 +126,26 @@
                     <div class="label">Total Visitors:</div>
                     <div class="value">{data.stats[clientInfo.datacenter]?.totalVisitorsToThisColo || 0}</div>
                 </div>
+                <div class="data-row">
+                    <div class="label">Average Visitor Distance:</div>
+                    <div class="value">{data.stats[clientInfo.datacenter]?.averageDistance || 0} kilometers</div>
+                </div>
             </div>
 
             <div class="section all-colos">
                 <h2>All Datacenter Activity</h2>
                 {#each Object.entries(data.stats).sort(([,a], [,b]) => b.totalVisitorsToThisColo - a.totalVisitorsToThisColo) as [coloCd, stats]}
-                    {#if coloCd !== clientInfo.datacenter}
-                        <div class="colo-stats">
-                            <h3>{stats.name} ({coloCd})</h3>
-                            <div class="data-row">
-                                <div class="label">Visitors:</div>
-                                <div class="value">{stats.totalVisitorsToThisColo}</div>
-                            </div>
+                    <div class="colo-stats" class:current-colo={coloCd === clientInfo.datacenter}>
+                        <h3>{stats.name} ({coloCd})</h3>
+                        <div class="data-row">
+                            <div class="label">Visitors:</div>
+                            <div class="value">{stats.totalVisitorsToThisColo}</div>
                         </div>
-                    {/if}
+                        <div class="data-row">
+                            <div class="label">Average Distance:</div>
+                            <div class="value">{stats.averageDistance} kilometers</div>
+                        </div>
+                    </div>
                 {/each}
             </div>
         {/if}
