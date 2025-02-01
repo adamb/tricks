@@ -100,8 +100,8 @@
     }
 
     .colo-stats {
-        margin: 1rem 0;
-        padding: 0.5rem;
+        margin: 0.5rem 0;
+        padding: 0.25rem 0.5rem;
         border-bottom: 1px solid rgba(255, 204, 0, 0.3);
     }
 
@@ -109,10 +109,8 @@
         border-bottom: none;
     }
 
-    .all-colos h3 {
+    .colo-stats .label {
         color: #ffcc00;
-        font-size: 1.1rem;
-        margin: 0.5rem 0;
     }
 </style>
 
@@ -128,14 +126,9 @@
                 <h2>All Datacenter Activity</h2>
                 {#each Object.entries(data.stats).sort(([,a], [,b]) => b.totalVisitorsToThisColo - a.totalVisitorsToThisColo) as [coloCd, stats]}
                     <div class="colo-stats" class:current-colo={coloCd === clientInfo.datacenter}>
-                        <h3>{stats.name} ({coloCd})</h3>
                         <div class="data-row">
-                            <div class="label">Visitors:</div>
-                            <div class="value">{stats.totalVisitorsToThisColo}</div>
-                        </div>
-                        <div class="data-row">
-                            <div class="label">Average Distance:</div>
-                            <div class="value">{stats.averageDistance} kilometers</div>
+                            <div class="label">{stats.name} ({coloCd})</div>
+                            <div class="value">{stats.totalVisitorsToThisColo} visitors, {stats.averageDistance}km avg</div>
                         </div>
                     </div>
                 {/each}
