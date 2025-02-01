@@ -56,8 +56,8 @@
     }
 
     @keyframes bounce {
-        0%, 100% { transform: translateX(0); }
-        50% { transform: translateX(10px); }
+        0%, 20%, 40%, 60%, 80%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(10px); }
     }
 
     .click-here {
@@ -65,7 +65,7 @@
         color: #ffcc00;
         font-size: 16px;
         margin-left: 1rem;
-        animation: bounce 1s infinite;
+        animation: bounce 1s 3;  /* Run animation 3 times only */
     }
 </style>
 
