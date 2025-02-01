@@ -48,8 +48,7 @@ export async function load({ request, platform }) {
         await platform.env.VISITOR_STATS.put(
             `visit:${colo}:${timestamp}`,
             JSON.stringify({
-                distance: distanceKm,
-                timestamp
+                distance: distanceKm
             })
         );
 
