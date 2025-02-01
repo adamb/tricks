@@ -91,8 +91,8 @@
     .section {
         margin-bottom: 2rem;
         padding: 1rem;
-        border: 3px solid #ffcc00;
-        border-radius: 4px;
+        border: 6px solid #ffcc00;
+        border-radius: 0;
     }
 
     .current-colo {
