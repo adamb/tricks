@@ -115,7 +115,6 @@
 </style>
 
 <div class="whoami-container">
-    <h1>Edge Network Statistics</h1>
     <div class="info-grid">
         {#if data.stats}
             <div class="section current-colo">
