@@ -1,14 +1,14 @@
 export async function POST({ request, platform }) {
-    if (!platform?.env?.VISITOR_STATS) {
-        return new Response(JSON.stringify({ error: 'KV not available' }), {
+    if (!platform?.env?.VISITOR_STATS || !platform?.env?.UPDATE_API_SECRET) {
+        return new Response(JSON.stringify({ error: 'Required environment variables not available' }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
     }
 
-    const { visitKey, clientIP } = await request.json();
+    const { visitKey, clientIP, secret } = await request.json();
     
-    if (!visitKey || !clientIP) {
+    if (!visitKey || !clientIP || !secret) {
         return new Response(JSON.stringify({ error: 'Missing required data' }), {
             status: 400,
             headers: { 'Content-Type': 'application/json' }
@@ -16,6 +16,14 @@ export async function POST({ request, platform }) {
     }
 
     try {
+        // Validate the secret
+        if (secret !== platform.env.UPDATE_API_SECRET) {
+            return new Response(JSON.stringify({ error: 'Invalid secret' }), {
+                status: 403,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+
         // Get existing visit data
         const existingData = await platform.env.VISITOR_STATS.get(visitKey, { type: 'json' });
         if (!existingData) {
