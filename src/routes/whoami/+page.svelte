@@ -122,14 +122,6 @@
         {#if data.stats}
             <div class="section current-colo">
                 <h2>You're {clientInfo.distanceKm} km from {clientInfo.coloName} ({clientInfo.datacenter})</h2>
-                <div class="data-row">
-                    <div class="label">Total Visitors:</div>
-                    <div class="value">{data.stats[clientInfo.datacenter]?.totalVisitorsToThisColo || 0}</div>
-                </div>
-                <div class="data-row">
-                    <div class="label">Average Visitor Distance:</div>
-                    <div class="value">{data.stats[clientInfo.datacenter]?.averageDistance || 0} kilometers</div>
-                </div>
             </div>
 
             <div class="section all-colos">
