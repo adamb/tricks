@@ -34,7 +34,8 @@
                     },
                     body: JSON.stringify({
                         visitKey: clientInfo.visitKey,
-                        clientIP
+                        clientIP,
+                        secret: import.meta.env.VITE_UPDATE_API_SECRET
                     })
                 });
                 
