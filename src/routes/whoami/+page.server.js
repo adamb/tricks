@@ -1,4 +1,5 @@
 import dcColos from '../../lib/DC-Colos.json';
+import { sendEmail } from '$lib/emailSender';
 
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     const R = 6371; // Radius of the earth in km
@@ -126,6 +127,25 @@ export async function load({ request, platform }) {
                 recentVisits: 1,
                 name: coloInfo.name
             };
+
+            // Get client IP from request
+            const clientIP = request.headers.get('cf-connecting-ip') || 'Unknown IP';
+
+            // Send status email about new datacenter
+            try {
+                await sendEmail({
+                    to: 'admin@selfie.pr',
+                    subject: `New Datacenter Detected: ${coloInfo.name} (${colo})`,
+                    text: `A new Cloudflare datacenter has been detected:\n\n` +
+                          `Datacenter: ${coloInfo.name} (${colo})\n` +
+                          `Location: ${coloInfo.lat}, ${coloInfo.lon}\n` +
+                          `First Visitor Distance: ${distanceKm}km\n` +
+                          `Client IP: ${clientIP}`,
+                    platform
+                });
+            } catch (error) {
+                console.error('Failed to send new datacenter notification:', error);
+            }
         }
     }
 
