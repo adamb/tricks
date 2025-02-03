@@ -41,6 +41,7 @@ export async function load({ request, platform }) {
     console.log('Platform env:', platform?.env);
     console.log('KV binding available:', !!platform?.env?.VISITOR_STATS);
     console.log('Distance:', distanceKm);
+    console.log('Current datacenter:', cf?.colo);
     
     if (platform?.env?.VISITOR_STATS && distanceKm !== 'Not available') {
         const colo = cf?.colo || 'unknown';
@@ -78,6 +79,8 @@ export async function load({ request, platform }) {
             coloVisits[visitColo].push(parseInt(visitTime));
         });
 
+        console.log('All datacenter visits:', coloVisits);
+        
         // Calculate stats for each colo
         for (const [coloCd, visits] of Object.entries(coloVisits)) {
             // Get all visit data for this colo
