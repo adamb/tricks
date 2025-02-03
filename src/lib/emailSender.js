@@ -1,5 +1,6 @@
 export async function sendEmail({ to, subject, text }) {
-    if (!platform?.env?.MAILHOP_CREDS) {
+    const creds = platform?.env?.MAILHOP_CREDS
+    if (!creds) {
         console.error('MAILHOP_CREDS not available');
         return false;
     }
@@ -9,7 +10,7 @@ export async function sendEmail({ to, subject, text }) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Basic ${platform.env.MAILHOP_CREDS}`
+                'Authorization': `Basic ${creds}`
             },
             body: JSON.stringify({
                 messages: [{
