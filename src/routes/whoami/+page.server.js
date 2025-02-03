@@ -19,29 +19,6 @@ function deg2rad(deg) {
 
 
 export async function load({ request, platform }) {
-    // Send test email for every request
-    console.log('Whoami endpoint hit, preparing to send test email');
-    console.log('Platform check:', {
-        platformExists: !!platform,
-        envExists: !!platform?.env,
-        availableEnvKeys: platform?.env ? Object.keys(platform.env) : []
-    });
-
-    try {
-        const emailResult = await sendEmail({
-            to: 'admin@selfie.pr',
-            subject: 'Test: Whoami Endpoint Hit',
-            text: `The whoami endpoint was accessed at ${new Date().toISOString()}\nRequest CF data: ${JSON.stringify(request.cf, null, 2)}`,
-            platform
-        });
-        console.log('Email send attempt result:', emailResult);
-    } catch (error) {
-        console.error('Failed to send test email:', {
-            error: error.message,
-            stack: error.stack
-        });
-    }
-
     // Get Cloudflare data from the request object
     const cf = request.cf;
     
