@@ -132,8 +132,23 @@ export async function load({ request, platform }) {
             const clientIP = request.headers.get('cf-connecting-ip') || 'Unknown IP';
 
             // Send status email about new datacenter
+            console.log('Attempting to send email for new datacenter:', {
+                datacenter: coloInfo.name,
+                colo,
+                location: `${coloInfo.lat}, ${coloInfo.lon}`,
+                distance: distanceKm,
+                clientIP
+            });
+
             try {
-                await sendEmail({
+                console.log('Email parameters:', {
+                    to: 'admin@selfie.pr',
+                    subject: `New Datacenter Detected: ${coloInfo.name} (${colo})`,
+                    platformExists: !!platform,
+                    platformEnv: platform?.env ? Object.keys(platform.env) : 'no env'
+                });
+
+                const emailResult = await sendEmail({
                     to: 'admin@selfie.pr',
                     subject: `New Datacenter Detected: ${coloInfo.name} (${colo})`,
                     text: `A new Cloudflare datacenter has been detected:\n\n` +
@@ -143,8 +158,15 @@ export async function load({ request, platform }) {
                           `Client IP: ${clientIP}`,
                     platform
                 });
+
+                console.log('Email send result:', emailResult);
             } catch (error) {
                 console.error('Failed to send new datacenter notification:', error);
+                console.error('Error details:', {
+                    name: error.name,
+                    message: error.message,
+                    stack: error.stack
+                });
             }
         }
     }
