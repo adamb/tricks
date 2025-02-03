@@ -117,7 +117,13 @@ export async function load({ request, platform }) {
         }
 
         // Ensure current colo exists in stats even if no visits
+        console.log('Checking if colo exists in stats:', {
+            colo,
+            existingStats: !!coloStats[colo]
+        });
+        
         if (!coloStats[colo]) {
+            console.log('New datacenter detected:', colo);
             coloStats[colo] = {
                 totalVisitorsToThisColo: 1,
                 averageDistance: Math.round(distanceKm),

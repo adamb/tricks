@@ -6,6 +6,17 @@ export async function sendEmail({ to, subject, text, platform }) {
     }
 
     try {
+        console.log('Attempting to send email with creds:', !!creds);
+        const payload = {
+            messages: [{
+                from: { email: "noreply@selfie.pr" },
+                to: [{ email: to }],
+                subject: subject,
+                text: text
+            }]
+        };
+        console.log('Email payload:', payload);
+        
         const response = await fetch('https://api.outbound.mailhop.org/v1/send', {
             method: 'POST',
             headers: {
