@@ -21,13 +21,19 @@ export async function sendEmail({ to, subject, text, platform }) {
             })
         });
 
+        const responseData = await response.json();
+        console.log('Email API response:', {
+            status: response.status,
+            ok: response.ok,
+            data: responseData
+        });
+
         if (!response.ok) {
-            const error = await response.json();
-            console.error('Failed to send email:', error);
+            console.error('Failed to send email:', responseData);
             return false;
         }
 
-        return true;
+        return responseData;
     } catch (error) {
         console.error('Error sending email:', error);
         return false;
