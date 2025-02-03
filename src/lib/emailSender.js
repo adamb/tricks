@@ -14,6 +14,7 @@ export async function sendEmail({ to, subject, text, platform }) {
             },
             body: JSON.stringify({
                 messages: [{
+                    from: { email: "noreply@selfie.pr" },
                     to: [{ email: to }],
                     subject: subject,
                     text: text
