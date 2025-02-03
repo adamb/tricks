@@ -1,5 +1,13 @@
 export async function sendEmail({ to, subject, text, platform }) {
+    console.log('Email function entry point');
     const creds = platform?.env?.MAILHOP_CREDS || import.meta.env.VITE_MAILHOP_CREDS;
+    console.log('Credentials check:', {
+        platformExists: !!platform,
+        envExists: !!platform?.env,
+        hasMailhopCreds: !!platform?.env?.MAILHOP_CREDS,
+        hasViteCreds: !!import.meta.env?.VITE_MAILHOP_CREDS
+    });
+    
     if (!creds) {
         console.error('MAILHOP_CREDS not available');
         return false;
