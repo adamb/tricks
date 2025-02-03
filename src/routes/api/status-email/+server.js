@@ -14,7 +14,8 @@ export async function POST({ request, platform }) {
         const result = await sendEmail({
             to: 'admin@selfie.pr',
             subject: `[Tricks Status] ${subject}`,
-            text: text
+            text: text,
+            platform
         });
 
         return new Response(JSON.stringify({ success: result }), {

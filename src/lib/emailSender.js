@@ -1,4 +1,4 @@
-export async function sendEmail({ to, subject, text }) {
+export async function sendEmail({ to, subject, text, platform }) {
     const creds = platform?.env?.MAILHOP_CREDS || import.meta.env.VITE_MAILHOP_CREDS;
     if (!creds) {
         console.error('MAILHOP_CREDS not available');
