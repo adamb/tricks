@@ -122,7 +122,12 @@
     <div class="info-grid">
         {#if data.stats}
             <div class="section current-colo">
-                <h2>You're {clientInfo.distanceKm} km from {clientInfo.coloName} ({clientInfo.datacenter})</h2>
+                <h2>
+                    You're {clientInfo.distanceKm} km from {clientInfo.coloName} ({clientInfo.datacenter})
+                    {#if data.stats[clientInfo.datacenter]?.isFirstVisitor}
+                        <span class="new-record">🎉 First visitor ever!</span>
+                    {/if}
+                </h2>
             </div>
 
             <div class="section all-colos">
