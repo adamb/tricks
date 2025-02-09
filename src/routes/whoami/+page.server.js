@@ -38,8 +38,6 @@ export async function load({ request, platform }) {
     let visitKey = null;
     
     // Store visit data in KV
-    console.log('Platform env:', platform?.env);
-    console.log('KV binding available:', !!platform?.env?.VISITOR_STATS);
     console.log('Distance:', distanceKm);
     console.log('Current datacenter:', cf?.colo);
     
