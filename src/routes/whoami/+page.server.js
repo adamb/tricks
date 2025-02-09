@@ -79,7 +79,6 @@ export async function load({ request, platform }) {
             coloVisits[visitColo].push(parseInt(visitTime));
         });
 
-        console.log('All datacenter visits:', coloVisits);
         
         // Calculate stats for each colo
         for (const [coloCd, visits] of Object.entries(coloVisits)) {
