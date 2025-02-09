@@ -179,7 +179,20 @@ export async function load({ request, platform }) {
         }
     }
 
-    return {
+    console.log('Preparing return data:', {
+        clientLatitude,
+        clientLongitude,
+        datacenter: cf?.colo,
+        coloName: coloInfo.name,
+        coloLatitude,
+        coloLongitude,
+        distanceKm,
+        visitKey,
+        hasStats: !!coloStats,
+        statsKeys: coloStats ? Object.keys(coloStats) : []
+    });
+
+    const returnData = {
         clientInfo: {
             latitude: clientLatitude,
             longitude: clientLongitude,
@@ -192,4 +205,13 @@ export async function load({ request, platform }) {
         },
         stats: coloStats
     };
+
+    console.log('Final return data structure:', {
+        hasClientInfo: !!returnData.clientInfo,
+        clientInfoKeys: Object.keys(returnData.clientInfo),
+        hasStats: !!returnData.stats,
+        statsCount: returnData.stats ? Object.keys(returnData.stats).length : 0
+    });
+
+    return returnData;
 }
