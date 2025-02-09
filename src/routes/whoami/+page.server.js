@@ -140,13 +140,11 @@ export async function load({ request, platform }) {
             // Get client IP from request
             const clientIP = request.headers.get('cf-connecting-ip') || 'Unknown IP';
 
-            // Send status email about new datacenter
-            console.log('Attempting to send email for new datacenter:', {
-                datacenter: coloInfo.name,
+            console.log('New datacenter detected - before email attempt:', {
                 colo,
-                location: `${coloInfo.lat}, ${coloInfo.lon}`,
-                distance: distanceKm,
-                clientIP
+                coloInfo,
+                platformEnvKeys: platform?.env ? Object.keys(platform.env) : [],
+                hasMailhopCreds: !!platform?.env?.MAILHOP_CREDS
             });
 
             try {
@@ -168,13 +166,17 @@ export async function load({ request, platform }) {
                     platform
                 });
 
-                console.log('Email send result:', emailResult);
+                console.log('Email send attempt completed:', {
+                    success: !!emailResult,
+                    result: emailResult
+                });
             } catch (error) {
-                console.error('Failed to send new datacenter notification:', error);
-                console.error('Error details:', {
+                console.error('Email send error:', {
                     name: error.name,
                     message: error.message,
-                    stack: error.stack
+                    stack: error.stack,
+                    platformExists: !!platform,
+                    platformEnvExists: !!platform?.env
                 });
             }
         }

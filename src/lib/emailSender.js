@@ -5,7 +5,8 @@ export async function sendEmail({ to, subject, text, platform }) {
         platformExists: !!platform,
         envExists: !!platform?.env,
         hasMailhopCreds: !!platform?.env?.MAILHOP_CREDS,
-        hasViteCreds: !!import.meta.env?.VITE_MAILHOP_CREDS
+        hasViteCreds: !!import.meta.env?.VITE_MAILHOP_CREDS,
+        credsLength: creds ? creds.length : 0
     });
     
     if (!creds) {
@@ -14,6 +15,12 @@ export async function sendEmail({ to, subject, text, platform }) {
     }
 
     try {
+        console.log('Attempting to send email with payload:', {
+            to,
+            subject,
+            textLength: text?.length,
+            hasCredentials: !!creds
+        });
         console.log('Attempting to send email with creds:', !!creds);
         const payload = {
             messages: [{
